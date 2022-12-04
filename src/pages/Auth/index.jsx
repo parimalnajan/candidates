@@ -14,7 +14,7 @@ const Auth = () => {
     console.log(user);
     console.log(user.displayName);
     setUserData(user);
-    navigate("/candidates");
+    navigate("/candidate");
 
     sessionStorage.setItem("isAuth", "true");
     var isAuth = sessionStorage.getItem("isAuth")

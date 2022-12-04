@@ -25,12 +25,12 @@ const AppRoutes = () => {
         <Routes>
             <Route exact path="/auth" element = {<Auth/>}></Route>
             
-            <Route exact path="/candidates"
+            <Route exact path="/candidate/*"
                element = {<ProtectedRoute ><Candidates/></ProtectedRoute>}>
             </Route>
 
             {/* <Route exact path="/candidates" element = {<Candidates/>}></Route> */} 
-            <Route path="*" element={<ErrorPage/>} />
+            {/* <Route path="*" element={<ErrorPage/>} /> */}
      </Routes>
     // <div>asd</div>
   )
