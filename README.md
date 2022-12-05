@@ -10,6 +10,7 @@ https://candidates-mgmt.netlify.app/
 ### `Notes`
 <ul>
   <li>Only google auth works.</li>
+  <li>The Names list updates only after a page refresh - after performing add or edit </li>
   <li>Protected routes</li>
   <li> TODO : add in multi-steps - Experience, skills, education in the edit/new form.</li>
   <ul>
