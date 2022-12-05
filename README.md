@@ -11,7 +11,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 #### Demo Link
 https://candidates-mgmt.netlify.app/
 
-###Notes
--Only google auth works.
--Protected content routes
--TODO : add Experience, skills, education section in the edit/new form.
+### Notes
+<ul>
+  <li>Only google auth works.</li>
+  <li>Protected content routes</li>
+  <li> *TODO* : add Experience, skills, education section in the edit/new form.</li>
+  </ul>
+
