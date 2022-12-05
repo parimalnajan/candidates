@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCandidateById } from '../../../utils';
+import { createNewCandidate, getCandidateById, updateCandidateDetails } from '../../../utils';
 import './NewCandidate.css'
 
 const NewCandidate = ({isAddMode}) => {
@@ -15,142 +14,36 @@ const [hobbiesArray,setHobbiesArray]= useState([])
 
 const [currentCandidate,setCurrentCandidate]=useState({})
 
-  const navigate= useNavigate()
   const selectedId= useParams();
   const id = selectedId.id
-  
-  const [dataToSubmit,setDataToSubmit] = useState({
-
-  })
-  const dataNew = {
-    "profile_picture": "testing-sasuke",
-    "name": "sasuke uchiha",
-    "address": "not lif",
-    "phone": "9879879870",
-    "email": "test.naruto@nonstopio.com",
-    "gender": "male",
-    "hobbies": [
-    "Reading",
-    "Music"
-    ],
-    "education": [
-    {
-    "institute": "ABC School",
-    "degree": "10th",
-    "percentage": 99,
-    "pass_out_year": 2010
-    },
-    {
-    "institute": "ABC School",
-    "degree": "10th",
-    "percentage": 99,
-    "pass_out_year": 2010
-    }
-    ],
-    "skills": [
-    {
-    
-    "name": "Java",
-    "experience": 4
-    },
-    {
-    "name": "Java",
-    "experience": 4
-    },
-    {
-    "name": "Java",
-    "experience": 4
-    }
-    ],
-    "experience": [
-    {
-    "company": "ABC PVT LTD",
-    "project": "Some prohect",
-    "role": "SSE",
-    "team_size": 4,
-    "duration_from": "Jan 2021",
-    "duration_to": "Nov 2021"
-    },
-    {
-    "company": "ABC PVT LTD",
-    "project": "Some prohect",
-    "role": "SSE",
-    "team_size": 4,
-    "duration_from": "Jan 2021",
-    "duration_to": "Nov 2021"
-    },
-    {
-    "company": "ABC PVT LTD",
-    "project": "Some prohect",
-    "role": "SSE",
-    "team_size": 4,
-    "duration_from": "Jan 2021",
-    "duration_to": "Nov 2021"
-    }
-    ],
-    "id": "1"
-    }
 
 function onSubmit() {
   const dataToSubmit={    
     hobbies:hobbiesArray,
     name:candidateName,
     email:email,
-   gender:gender,
-   profile_picture:profilePicture,}
+    gender:gender,
+    profile_picture:profilePicture,}
     return isAddMode===true
         ? createUser(dataToSubmit)
         : updateUser(id, dataToSubmit);
 }
 
 function createUser(data) {
-  console.log(data)
-  console.log(JSON.stringify(data))
-  const post = async (data)=>{
-    const url='https://60d5a2c2943aa60017768b01.mockapi.io/candidate'
-         const response = await fetch(url, {
-           method: 'POST',
-           headers: {
-               'Content-type': 'application/json'
-           },
-           body: JSON.stringify(data)
-       });
-       // Awaiting response.json()
-       const resData = await response.json();
-       // Returning result data
-       console.log(resData) 
- 
-   }
-   post(data) 
+  (async () => {
+    const resData = await createNewCandidate(data)
+    console.log(resData)
+  })();
 }
 
 function updateUser(id, data) {
-  console.log(id,data)
-    
-  const put =async (id, data) =>{
-    const url=`https://60d5a2c2943aa60017768b01.mockapi.io/candidate/${id}`
- 
-         const response = await fetch(url, {
-           method: 'PUT',
-           headers: {
-               'Content-type': 'application/json'
-           },
-           body: JSON.stringify(data)
-       });
- 
-       // Awaiting response.json()
-       const resData = await response.json();
- 
-       // Returning result data
-       console.log(resData) 
-       //---------can only send changed data to replace
-       
-   }
-
-   put(id,data)
+  
+  (async () => {
+    const resData = await updateCandidateDetails(id,data)
+    console.log(resData)
+  })();
+  
 }
-
-
 useEffect( () => {
  if(isAddMode){
   return
@@ -158,7 +51,6 @@ useEffect( () => {
   (async () => {
       const resData = await getCandidateById(id)
       setCurrentCandidate(resData)
-      console.log(resData)
       setCandidateName(resData.name)
       setEmail(resData.email)
       setGender(resData.gender)
@@ -167,17 +59,12 @@ useEffect( () => {
 
 })();
 setCandidateName(currentCandidate.name)
-
 }, [selectedId.id])
 
-
   return (
-    <div className='text-left form-component p-8'
-    > 
-    
+    <div className='text-left form-component p-8'> 
         <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add User" : "Edit User"}</h1>
         <div>{id}</div>
-
         <label>
         <legend>Name</legend>
           <input
@@ -211,8 +98,6 @@ setCandidateName(currentCandidate.name)
             required
           />
         </label>
-
-
         <label>
           <legend>Gender</legend>
         <div className='' onChange={(e) => setGender(e.target.value)}>

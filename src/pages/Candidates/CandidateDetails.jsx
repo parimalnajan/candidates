@@ -13,12 +13,10 @@ const CandidateDetails = () => {
     //  setCurrentCandidate(allCandidates?.find((x)=>x.id===selectedId.id)) 
 
     useEffect( () => {
-
         (async () => {
             const resData = await getCandidateById(selectedId.id)
             setCurrentCandidate(resData)
           })();
-    
       }, [selectedId.id])
 
 
