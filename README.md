@@ -15,6 +15,7 @@ https://candidates-mgmt.netlify.app/
 <ul>
   <li>Only google auth works.</li>
   <li>Protected content routes</li>
-  <li> *TODO* : add Experience, skills, education section in the edit/new form.</li>
+  <li> TODO : add Experience, skills, education section in the edit/new form.</li>
+  <li> Tests not added </li>
   </ul>
 
