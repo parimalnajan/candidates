@@ -11,6 +11,8 @@ const CandidatesList = ({names}) => {
     }
   return (
     <section className='flex flex-col mr-4 border-r border-gray-200 text-left'>
+      <button className='text-left px-4 py-1 rounded-md bg-blue-400 w-fit mt-4 ml-4'  onClick={()=>{navigate(`/candidate/new`)}}>ADD +</button>
+
         <ol className="list-none ">
         {
             names.map((name)=>{

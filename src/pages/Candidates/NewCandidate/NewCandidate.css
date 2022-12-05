@@ -4,8 +4,16 @@
     border-radius: 4px;
     width: 300px;
     margin: 4px;
+    outline: none;
 }
 
 .form-component label{
     margin: 12px;
+}
+
+legend{
+    font-size: 14px;
+    margin-top: 12px;
+    font-weight: 500;
+    
 }

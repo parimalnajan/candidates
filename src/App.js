@@ -12,7 +12,6 @@ const [userData,setUserData] = useState()
   return (
   <AuthContext.Provider value={{userData,setUserData}}>
     <div className="App flex flex-col">
-
     <AppRoutes/>
     </div>
   </AuthContext.Provider>

@@ -50,15 +50,16 @@ const Candidates = () => {
 return (
   <candidateContext.Provider value={{allCandidates}}>
     <section>
-    <button className='bg-blue-500 p-2' onClick={handleLogout}>Logout</button>
-    <div className='flex flex-row mx-40'>
-      <div className="w-56 h-screen overflow-scroll"><CandidatesList names={candidateNames} /></div>
+    <button className='bg-blue-400 p-2 fixed right-4 top-4 rounded-md px-2 py-1' onClick={handleLogout}>Logout</button>
+    <div className='flex flex-row'>
+      <div className="w-1/4 h-screen overflow-scroll"><CandidatesList names={candidateNames} /></div>
+      <div className="w-3/4">
       <Routes>
       <Route exact path="/new" element = {<NewCandidate isAddMode={true}/>}></Route>
       <Route exact path="/:id/edit" element = {<NewCandidate isAddMode={false}/>}></Route>
       <Route exact path="/:id" element = {<CandidateDetails allCandidates={allCandidates}/>}></Route>
-
       </Routes>
+      </div>
     </div>
     </section>
 

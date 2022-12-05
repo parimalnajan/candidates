@@ -172,13 +172,14 @@ setCandidateName(currentCandidate.name)
 
 
   return (
-    <div className='text-left form-component'
+    <div className='text-left form-component p-8'
     > 
-      <div>{id}</div>
     
-        <h1>{isAddMode ? "Add User" : "Edit User"}</h1>
+        <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add User" : "Edit User"}</h1>
+        <div>{id}</div>
+
         <label>
-          Name
+        <legend>Name</legend>
           <input
             name="name"
             type="text"
@@ -189,7 +190,7 @@ setCandidateName(currentCandidate.name)
         </label>
 
         <label>
-          Email
+          <legend>Email</legend>
           <input
             name="email"
             type="email"
@@ -198,9 +199,10 @@ setCandidateName(currentCandidate.name)
             required
           />
         </label>
-        <div className='text-left'>
+
         <label>
-          Profile Picture URL
+          <legend>  Profile Picture URL</legend>
+        
           <input
             name="profilepicture"
             type="text"
@@ -209,23 +211,34 @@ setCandidateName(currentCandidate.name)
             required
           />
         </label>
-        </div>
-        <div onChange={(e) => setGender(e.target.value)}>
-          <input type="radio" value="Male" name="gender" checked={gender === "Male"} /> Male
-          <input type="radio" value="Female" name="gender" checked={gender === "Female"}/> Female
-    </div>
-        <div>
+
+
         <label>
-        <div className='flex  gap-2 '>Hobbies 
-            {
-              hobbiesArray?.map((hobby)=>{
-                return<div className='px-2 py-1 rounded-lg bg-gray-200 w-fit ' >{hobby}
-                <span onClick={()=>setHobbiesArray(old=>
-                  old.filter((data)=> data!= hobby )
-                )}className='pl-1 ml-1 text-red-600'>x</span></div>
-              })
-            }
-          </div>
+          <legend>Gender</legend>
+        <div className='' onChange={(e) => setGender(e.target.value)}>
+        <input className='!w-4' type="radio" value="Male" name="gender" checked={gender === "Male"} />Male
+          <input className='!w-4' type="radio" value="Female" name="gender" checked={gender === "Female"}/>Female
+    </div>
+    </label>
+      <div>
+        <label>
+          <div className='flex  gap-2 '>
+            <legend>Hobbies</legend>
+             
+              {
+                hobbiesArray?.map((hobby)=>{
+                  return (
+                    <div className='px-2 py-1 rounded-lg bg-gray-200 w-fit'>
+                      {hobby}
+                       <span onClick={()=>setHobbiesArray(old=>
+                        old.filter((data)=> data!= hobby))}
+                        className='pl-1 ml-1 text-red-600'>
+                        x
+                        </span>
+                    </div>)
+                })
+              }
+            </div>
           <input
             name="hobbies"
             type="text"
@@ -234,14 +247,12 @@ setCandidateName(currentCandidate.name)
           />
           <button onClick={(e)=>{ e.preventDefault();
           if(!hobbiesArray)
-          setHobbiesArray([hobby])
-          else{setHobbiesArray(hobbiesArray=>[...hobbiesArray,hobby]);}  
-
+            setHobbiesArray([hobby])
+          else{setHobbiesArray(hobbiesArray=>[...hobbiesArray,hobby]);} 
           setHobby('')}}
           className='bg-purple-400 px-2 py-1 rounded-md'>Add</button>
-      
         </label>
-        </div>
+      </div>
         {
           isAddMode
           ?<button onClick={onSubmit} className='bg-purple-600 px-2 py-1 rounded-md mt-8 text-gray-50'> 
