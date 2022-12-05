@@ -10,8 +10,13 @@ https://candidates-mgmt.netlify.app/
 ### `Notes`
 <ul>
   <li>Only google auth works.</li>
-  <li>Protected content routes</li>
-  <li> TODO : add Experience, skills, education section in the edit/new form.</li>
+  <li>Protected routes</li>
+  <li> TODO : add in multi-steps - Experience, skills, education in the edit/new form.</li>
+  <ul>
+    <li>Recently Worked on a similar assignment with multiple steps, can be found at the below links</li>
+    <li>https://github1s.com/parimalnajan/cutshort/</li>
+    <li>https://cutshort-demo.netlify.app/</li>
+   </ul>
   <li> Tests not added </li>
   </ul>
 
