@@ -14,7 +14,7 @@ const AppRoutes = () => {
      console.log(storageAuth)
   
   const ProtectedRoute = ({ user, children }) => {
-    if (storageAuth===false) {
+    if (storageAuth!=="true") {
       alert("Please login to access this resource");
       return <Navigate to="/auth" replace />;
 
