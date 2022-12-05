@@ -1,28 +1,23 @@
 import { getAllByRole } from '@testing-library/react';
 import React, { useContext, useEffect } from 'react'
 import { candidateContext } from '.';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { getCandidateById } from '../../utils';
 
 const CandidateDetails = () => {
     const selectedId= useParams();
-    
+    const navigate = useNavigate()
     const [currentCandidate,setCurrentCandidate]=useState({})
     // const {allCandidates } = useContext(candidateContext);
     //  setCurrentCandidate(allCandidates?.find((x)=>x.id===selectedId.id)) 
 
-    useEffect(() => {
-        async function getCandidates(){
-        const url=`https://60d5a2c2943aa60017768b01.mockapi.io/candidate/${selectedId.id}`
-        // Awaiting for fetch response
-        const response = await fetch(url);
-     
-        // Awaiting for response.json()
-        const resData = await response.json();
-        setCurrentCandidate(resData)
-        //  setCurrentCandidate(await resData.find((x)=>x.id===selectedId.id))
-      }
-      getCandidates()
+    useEffect( () => {
+
+        (async () => {
+            const resData = await getCandidateById(selectedId.id)
+            setCurrentCandidate(resData)
+          })();
     
       }, [selectedId.id])
 
@@ -176,55 +171,14 @@ const CandidateDetails = () => {
           "id": "1"
           }
       
-      const post =async () =>{
-       const url='https://60d5a2c2943aa60017768b01.mockapi.io/candidate'
-     
-               // Awaiting for fetch response and 
-            // defining method, headers and body  
-            const response = await fetch(url, {
-              method: 'POST',
-              headers: {
-                  'Content-type': 'application/json'
-              },
-              body: JSON.stringify(data)
-          });
     
-          // Awaiting response.json()
-          const resData = await response.json();
-    
-          // Returning result data
-          console.log(resData) 
-    
-      }
-    
-      const put =async () =>{
-       const url='https://60d5a2c2943aa60017768b01.mockapi.io/candidate/185'
-     
-               // Awaiting for fetch response and 
-            // defining method, headers and body  
-            const response = await fetch(url, {
-              method: 'PUT',
-              headers: {
-                  'Content-type': 'application/json'
-              },
-              body: JSON.stringify(dataNew)
-          });
-    
-          // Awaiting response.json()
-          const resData = await response.json();
-    
-          // Returning result data
-          console.log(resData) 
-    
-          //---------can only send changed data to replace
-          
-      }
 
 
   return (
     <section className="flex flex-col rounded-md w-1/2">
-      ----CandidateDetails---- s <button onClick={post}>postit</button>
-      <button onClick={put}>PUT</button>
+      ----CandidateDetails---- s 
+      <button onClick={()=>{navigate(`/candidate/${selectedId.id}/edit`)}}>Edit</button>
+      <button onClick={()=>{navigate(`/candidate/new`)}}>ADD</button>
 
       <div>{selectedId.id}</div>
       <div className='w-full bg-gray-100 mb-2 p-4'>

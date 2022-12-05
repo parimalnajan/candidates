@@ -51,10 +51,11 @@ return (
   <candidateContext.Provider value={{allCandidates}}>
     <section>
     <button className='bg-blue-500 p-2' onClick={handleLogout}>Logout</button>
-    <div className='flex flex-row justify-center'>
+    <div className='flex flex-row mx-40'>
       <div className="w-56 h-screen overflow-scroll"><CandidatesList names={candidateNames} /></div>
       <Routes>
-      <Route exact path="/new" element = {<NewCandidate/>}></Route>
+      <Route exact path="/new" element = {<NewCandidate isAddMode={true}/>}></Route>
+      <Route exact path="/:id/edit" element = {<NewCandidate isAddMode={false}/>}></Route>
       <Route exact path="/:id" element = {<CandidateDetails allCandidates={allCandidates}/>}></Route>
 
       </Routes>

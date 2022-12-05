@@ -23,7 +23,8 @@ const AppRoutes = () => {
   };
   return (
         <Routes>
-            <Route exact path="/auth" element = {<Auth/>}></Route>
+            <Route path="/" element = {<Auth/>}></Route>
+            <Route path="/auth" element = {<Auth/>}></Route>
             
             <Route exact path="/candidate/*"
                element = {<ProtectedRoute ><Candidates/></ProtectedRoute>}>

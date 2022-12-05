@@ -1,0 +1,11 @@
+.form-component input{
+    padding: 4px;
+    border:1px solid silver;
+    border-radius: 4px;
+    width: 300px;
+    margin: 4px;
+}
+
+.form-component label{
+    margin: 12px;
+}
