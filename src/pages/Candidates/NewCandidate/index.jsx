@@ -63,7 +63,7 @@ setCandidateName(currentCandidate.name)
 
   return (
     <div className='text-left form-component p-8'> 
-        <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add User" : "Edit User"}</h1>
+        <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add New Candidate" : "Edit Candidate"}</h1>
         <div>{id}</div>
         <label>
         <legend>Name</legend>
@@ -141,9 +141,9 @@ setCandidateName(currentCandidate.name)
         {
           isAddMode
           ?<button onClick={onSubmit} className='bg-purple-600 px-2 py-1 rounded-md mt-8 text-gray-50'> 
-          Add new Candidate</button>
+          Submit </button>
           :<button onClick={onSubmit} className='bg-purple-600 px-2 py-1 rounded-md mt-8  text-gray-50'>
-            Edit Candidate #{id}</button>
+          Submit Changes</button>
         }
     </div>
   );
