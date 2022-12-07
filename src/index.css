@@ -15,3 +15,20 @@ code {
     monospace;
 }
 
+.text-brand{
+  color:rgb(192, 132, 252);
+}
+
+.bg-brand{
+  background-color: rgb(192, 132, 252);
+}
+
+.border-brand{
+  border-color: #664DE5;
+}
+
+.button-base{
+  padding:  4px 8px 4px 8px;
+  border-radius: 6px;
+
+}
