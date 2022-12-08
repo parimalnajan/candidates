@@ -9,5 +9,5 @@ export function useInput( type, styles) {
       [],
     )
     const input = <input type={type} className={`${styles} m-8 `} value={value} onChange={e => setValue(e.target.value)}  />;
-    return [value,clearValue, input];
+    return [value,setValue,clearValue, input];
   }
