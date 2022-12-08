@@ -7,39 +7,23 @@ import './NewCandidate.css'
 import Personal from './Personal';
 import ProgressIndicator from './ProgressIndicator';
 import Skills from './Skills';
-export const StepContext= createContext("default")
+export const FormContext= createContext("default")
 
 const NewCandidate = ({isAddMode}) => {
-  
-const [email,setEmail]=useState('');
-const [candidateName,setCandidateName]=useState('');
-const [profilePicture,setProfilePicture]=useState('');
-const [gender, setGender] = useState("Male");
-const [hobby, setHobby] = useState('');
-const [hobbiesArray,setHobbiesArray]= useState([])
 
 const [currentCandidate,setCurrentCandidate]=useState({})
 
+const [formState,setFormState]=useState({});
+
   const selectedId= useParams();
   const id = selectedId.id
-
-function onSubmit() {
-  const dataToSubmit={    
-    hobbies:hobbiesArray,
-    name:candidateName,
-    email:email,
-    gender:gender,
-    profile_picture:profilePicture,}
-    return isAddMode===true
-        ? createUser(dataToSubmit)
-        : updateUser(id, dataToSubmit);
-}
 
 function createUser(data) {
   (async () => {
     const resData = await createNewCandidate(data)
     console.log(resData)
   })();
+  console.log("prepsot",data)
 }
 
 function updateUser(id, data) {
@@ -47,30 +31,43 @@ function updateUser(id, data) {
     const resData = await updateCandidateDetails(id,data)
     console.log(resData)
   })();
+  console.log("prepsot",id,data)
+
 }
 
   useEffect( () => {
     if(isAddMode){
+      
       return
     }
       (async () => {
           const resData = await getCandidateById(id)
           setCurrentCandidate(resData)
-          setCandidateName(resData.name)
-          setEmail(resData.email)
-          setGender(resData.gender)
-          setProfilePicture(resData.profile_picture)
-          setHobbiesArray(resData.hobbies)
+          setFormState(resData)
+          // setCandidateName(resData.name)
+          // setEmail(resData.email)
+          // setGender(resData.gender)
+          // setProfilePicture(resData.profile_picture)
+          // setHobbiesArray(resData.hobbies)
     })();
-    setCandidateName(currentCandidate.name)
   }, [selectedId.id])
 
 
+  function onSubmit() {
+
+      return isAddMode===true
+          ? createUser(formState)
+          : updateUser(id, formState);
+  }
 
 
-
+  useEffect(() => {
+    console.log({formState})
   
-    const steps = [{id:1,name:"Personal"},{id:2,name:"Education"},{id:3,name:"Skills"},{id:4,name:"Experience"}]
+  
+  }, [formState])
+  
+    const steps = [{id:1,name:"Personal"},{id:2,name:"Skills"},{id:3,name:"Education"},{id:4,name:"Experience"}]
     const [currentStep,setCurrentStep] = useState(1);
   
     const handleNextStep = () => {
@@ -85,19 +82,19 @@ function updateUser(id, data) {
       setCurrentStep(oldState=> oldState-1)
 
     }
-
   return (
     <div className='text-left form-component p-8'> 
-  <StepContext.Provider value={{steps,currentStep,handleNextStep}}>
+  <FormContext.Provider value={{steps,currentStep,handleNextStep,formState,setFormState,currentCandidate,isAddMode}}>
 
     <ProgressIndicator/>
-    <button className='button-base bg-gray-100 mr-4' onClick={()=>handlePrevStep()}> -wip- back</button>
-    <button className='button-base bg-gray-100' onClick={()=>handleNextStep()}>-wip- next</button>
+    {/* <button className='button-base bg-gray-100' onClick={()=>handleNextStep()}>-wip- next</button> */}
+    <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add New Candidate" : "Edit Candidate"}</h1>
+    <div>{id}</div>
           { currentStep===1? 
           
             <>
-          <h1 className='text-xl  font-semibold text-gray-600'>{isAddMode ? "Add New Candidate" : "Edit Candidate"}</h1>
-            <div>{id}</div>
+          <Personal isAddMode={isAddMode}/>
+            {/* 
             <label >
             <legend>Name</legend>
               <input
@@ -168,24 +165,31 @@ function updateUser(id, data) {
               setHobby('')}}
               className='bg-purple-400 px-2 py-1 rounded-md'>Add</button>
             </label>
-          </div>
-            {
-              isAddMode
-              ?<button onClick={onSubmit} className='button-base bg-purple-600 mt-8 text-gray-50'> 
-              Submit </button>
-              :<button onClick={onSubmit} className='button-base  bg-purple-600 px-2 py-1 mt-8  text-gray-50'>
-              Submit Changes</button>
-            }
+          </div> */}
+
+
             </>
 
 
 
-        :currentStep===2?<Education />
+        :currentStep===4?<Education />
         :currentStep===3?<Experience />
-        :currentStep===4?<Skills/>
+        :currentStep===2?<Skills/>
         :null
       }
-      </StepContext.Provider>
+
+<button className='button-base block mt-2 bg-gray-300 mr-4' onClick={()=>handlePrevStep()}>back</button>
+
+                  <div className="x">
+            {
+              currentStep===steps.length-2?isAddMode
+              ?<button onClick={onSubmit} className='button-base bg-blue-400 mt-8 text-gray-50'> 
+              Submit New Candidate </button>
+              :<button onClick={onSubmit} className='button-base  bg-blue-400 px-2 py-1 mt-8  '>
+              Submit Form Changes</button>:<></>
+           }
+            </div>
+      </FormContext.Provider>
        
     </div>
   );

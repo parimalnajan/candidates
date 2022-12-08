@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StepContext } from '.'
+import { FormContext } from '.'
 
 
 const ProgressCircle = ({ currentStep, iterator ,lastStep,textToDisplay }) => {
@@ -22,9 +22,8 @@ const ProgressCircle = ({ currentStep, iterator ,lastStep,textToDisplay }) => {
 };
 
  const ProgressIndicator = () => {
-  const {steps,currentStep} = useContext(StepContext)
+  const {steps,currentStep} = useContext(FormContext)
   const stepNumbers = steps.map((x)=>x.id)   // convert ["skills","edu",...]  => [1,2,...]
-  console.log(steps,currentStep)
   return (
     <div className="text-center mb-4 flex">     
       {steps?.map((iterator) => (
