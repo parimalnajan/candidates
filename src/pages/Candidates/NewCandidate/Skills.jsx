@@ -4,9 +4,9 @@ import { FormContext } from '.'
 import { useInput } from '../../../hooks/UseInput'
 
 const Skills = () => {
-  const {steps,currentStep,currentCandidate,setFormState,formState} = useContext(FormContext)
+  const {steps,currentStep,handleNextStep,currentCandidate,setFormState,formState} = useContext(FormContext)
 
-  const [skill,clearSkill,skillJSX]=useInput("text","p-4 ")
+  const [skill,clearSkill,skillJSX]=useInput("text","p-4")
   const [experience,clearExperience,experienceJSX]=useInput("number","p-8")
 
   const [skillsArray,setSkillsArray] = useState(currentCandidate.skills)
@@ -19,6 +19,7 @@ const Skills = () => {
 
   const submitSkills = () =>{
     setFormState((oldState)=>{console.log(oldState);return {...oldState,skills:skillsArray}})
+    handleNextStep()
   }
 
   return (
@@ -41,13 +42,11 @@ const Skills = () => {
               })
             }
           </div>
-        
        <legend>Skill</legend>
         <div>  {skillJSX}</div>
        <legend>Experience (months)</legend>
 
-        <div>{experienceJSX}</div>
-
+        {experienceJSX}
         <button onClick={(e)=>{ e.preventDefault();
         if(!skillsArray)
           setSkillsArray([{name:skill,experience:experience}])
@@ -55,7 +54,7 @@ const Skills = () => {
        }}
         className='bg-purple-400 px-2 py-1 rounded-md'>Add</button>
 
-      <button onClick={submitSkills} className='button-base block mt-8 bg-blue-400'>Save and proceed</button>
+      <button onClick={submitSkills} className='button-base block mt-12 bg-blue-400'>Save and proceed</button>
 
 
     </div>
