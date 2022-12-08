@@ -52,7 +52,7 @@ return (
     <section>
     <button className='bg-blue-400 p-2 fixed right-4 top-4 rounded-md px-2 py-1' onClick={handleLogout}>Logout</button>
     <div className='flex flex-row'>
-      <div className="w-1/4 h-screen overflow-scroll"><CandidatesList names={candidateNames} /></div>
+      <div className="w-1/4 h-screen overflow-scroll sticky left-0 top-0"><CandidatesList names={candidateNames} /></div>
       <div className="w-3/4">
       <Routes>
       <Route exact path="/new" element = {<NewCandidate isAddMode={true}/>}></Route>
