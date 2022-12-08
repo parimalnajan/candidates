@@ -26,7 +26,7 @@ const Skills = () => {
     <div>
       <h4 className='text-lg font-semibold text-gray-600 my-4 mb-1'>Skills Summary</h4>
 
-        {skillsArray.length===0?<> Your skills will appear here</>:<></>}
+        {!skillsArray? <> Your skills will appear here</>:skillsArray.length===0?<>Your skills will appear here</>:<></>}
       <div className='mb-8 flex gap-2'>
         {
               skillsArray?.map((skill,index)=>{
