@@ -6,12 +6,12 @@ import { useInput } from '../../../hooks/UseInput'
 const Skills = () => {
   const {steps,currentStep,handleNextStep,currentCandidate,setFormState,formState} = useContext(FormContext)
 
-  const [skill,clearSkill,skillInput]=useInput("text","p-4")
-  const [experience,clearExperience,experienceInput]=useInput("number","p-8")
+  const [skill,useSkill,clearSkill,skillInput]=useInput("text","p-4")
+  const [experience,useExperience,clearExperience,experienceInput]=useInput("number","p-8")
 
   const [skillsArray,setSkillsArray] = useState(currentCandidate.skills)
   useEffect(() => {
-    console.log(skillsArray,currentCandidate);
+    // console.log(skillsArray,currentCandidate);
   
   
   }, [skillsArray])
@@ -45,7 +45,6 @@ const Skills = () => {
        <legend>Skill</legend>
         <div>  {skillInput}</div>
        <legend>Experience (months)</legend>
-
         {experienceInput}
         <button onClick={(e)=>{ e.preventDefault();
         if(!skillsArray)
