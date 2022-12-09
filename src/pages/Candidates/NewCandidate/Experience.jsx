@@ -5,8 +5,9 @@ import { useInput } from '../../../hooks/UseInput'
 
 const Experience = () => {
   const {steps,currentStep,handleNextStep,currentCandidate,setFormState,formState} = useContext(FormContext)
-
+  const [showForm, setshowForm] = useState(false)
   const [experienceDetails,setExperienceDetails] = useState([])
+  
   useEffect(() => {
     if(currentCandidate && experienceDetails?.length===0){
     setExperienceDetails(currentCandidate.experience)
@@ -15,8 +16,8 @@ const Experience = () => {
    
   const submitExperience = () =>{
     setFormState((old)=>{return {...old,experienceDetails}})
+    handleNextStep()
   }
-const [showForm, setshowForm] = useState(false)
 
   return (
     <div>
@@ -39,75 +40,71 @@ const [showForm, setshowForm] = useState(false)
       }
       <button
         onClick={()=>submitExperience()} 
-        className='button-base bg-blue-400'>Submit Experience</button>
+        className='button-base bg-purple-600 text-gray-100'>Save and Proceed</button>
       </div>
   );
 }
 
-  const AddEditExperience = ({editMode,expEntry,setExperienceDetails,experienceDetails,index,}) =>{
+  const AddEditExperience = ({editMode,expEntry,setExperienceDetails,experienceDetails,index,}) => {
 
-    const {steps,currentStep,handleNextStep,currentCandidate,setFormState,formState} = useContext(FormContext)
-
-  const [company,setcompany,clearCompany,companyInput]=useInput("text","p-4")
-  const [role,setrole,clearrole,roleInput]=useInput("text","p-4")
-  const [project,setproject,clearproject,projectInput]=useInput("text","p-4")
-  const [teamSize,setteamSize,clearteamSize,teamSizeInput]=useInput("text","p-4")
-  let [dateFrom,setdateFrom,cleardateFrom,dateFromInput]=useInput("date","p-4")
-  let [dateTo,setdateTo,cleardateTo,dateToInput]=useInput("date","p-4")
- 
-  useEffect(() => {
-    if(editMode===true){
-    setcompany(expEntry.company)    
-    setrole(expEntry.role)    
-    setteamSize(expEntry.team_size)    
-    setproject(expEntry.project)    
-    setdateFrom(expEntry.duration_to)    
-    setdateTo(expEntry.duration_from)    }
-
-    console.log(experienceDetails)
-  }, [experienceDetails])
-
-  useEffect(() => {
-  //   const d = new Date(dateTo)
-  // console.log(d);
-  //    const year = new Date(d).getFullYear();
-  //   const month = new Date(d).getMonth()+1;
-  // console.log(year,month);
-   }, [dateTo])
+    const [company,setcompany,clearCompany,companyInput]=useInput("text","p-4")
+    const [role,setrole,clearrole,roleInput]=useInput("text","p-4")
+    const [project,setproject,clearproject,projectInput]=useInput("text","p-4")
+    const [teamSize,setteamSize,clearteamSize,teamSizeInput]=useInput("text","p-4")
+    let [dateFrom,setdateFrom,cleardateFrom,dateFromInput]=useInput("date","p-4")
+    let [dateTo,setdateTo,cleardateTo,dateToInput]=useInput("date","p-4")
   
+    useEffect(() => {
+      if(editMode===true){
+      setcompany(expEntry.company)    
+      setrole(expEntry.role)    
+      setteamSize(expEntry.team_size)    
+      setproject(expEntry.project)    
+      setdateFrom(expEntry.duration_to)    
+      setdateTo(expEntry.duration_from)    }
 
-  const submit = (editMode) =>{
-    const expObject = {
-      company,
-      project,
-      role,
-      team_size:teamSize,
-      duration_from:dateFrom,
-      duration_to:dateTo
-    }
+      console.log(experienceDetails)
+    }, [experienceDetails])
 
-    if(editMode===false)
-    {  setExperienceDetails((oldData)=> {
-      if(!oldData){
-        return[expObject]
+    useEffect(() => {
+    //   const d = new Date(dateTo)
+    //   const year = new Date(d).getFullYear();
+    //   const month = new Date(d).getMonth()+1;
+    // console.log(year,month);
+    }, [dateTo])
+    
+
+    const submit = (editMode) =>{
+      const expObject = {
+        company,
+        project,
+        role,
+        team_size:teamSize,
+        duration_from:dateFrom,
+        duration_to:dateTo
       }
-      return [...oldData,expObject]})
-    }else{
-           // setExperienceDetails((oldData)=> {return [...oldData[index]=expObject]})
-           let temp = experienceDetails;
-           temp[index] = expObject
-           setExperienceDetails((old)=> old=temp)
-    }
 
-  }
-  const [successText, setsuccesstext] = useState(false)
-  const showSuccessText = () =>{
-    setsuccesstext(true)
-    setTimeout(() => {
-      setsuccesstext(false)
-    }, 5000);
-  }
-  const [showEditForm,setShowEditForm] = useState(false)
+      if(editMode===false)
+      {  setExperienceDetails((oldData)=> {
+        if(!oldData){
+          return[expObject]
+        }
+        return [...oldData,expObject]})
+      }else{
+            // setExperienceDetails((oldData)=> {return [...oldData[index]=expObject]})
+            let temp = experienceDetails;
+            temp[index] = expObject
+            setExperienceDetails((old)=> old=temp)
+      }
+    }
+    const [successText, setsuccesstext] = useState(false)
+    const showSuccessText = () =>{
+      setsuccesstext(true)
+      setTimeout(() => {
+        setsuccesstext(false)
+      }, 5000);
+    }
+    const [showEditForm,setShowEditForm] = useState(false)
 
     return(<div className='m-4 border-4 rounded-md p-4'>
 
@@ -161,9 +158,7 @@ const [showForm, setshowForm] = useState(false)
         </div>
         :<></>
         }
-        
       </div> 
-    
   )
     
   }
